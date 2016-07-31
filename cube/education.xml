@@ -1,0 +1,35 @@
+<Schema name="education">
+  <Cube name="education_cube" visible="true" cache="false" enabled="true">
+    <Table name="fact_retention">
+    </Table>
+    <Dimension type="TimeDimension" visible="true" foreignKey="i_date_id" highCardinality="false" name="date" caption="Date">
+      <Hierarchy name="year" visible="true" hasAll="true" allMemberName="All years" primaryKey="id" caption="Year">
+        <Table name="dim_date">
+        </Table>
+        <Level name="year" visible="true" column="description" type="Integer" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never" caption="Year">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="i_state_id" highCardinality="false" name="state" caption="State">
+      <Hierarchy name="state" visible="true" hasAll="true" allMemberName="All States" primaryKey="id" caption="State">
+        <Table name="dim_states">
+        </Table>
+        <Level name="state" visible="true" column="description" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="State">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="i_institution_id" name="institution" caption="Institution">
+      <Hierarchy name="institution" visible="true" hasAll="true" allMemberName="All Institutions" primaryKey="id" caption="Institution">
+        <Table name="dim_institution" alias="">
+        </Table>
+        <Level name="institution" visible="true" column="description" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never" caption="Institution">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="retention_rate" column="retention_rate" datatype="Numeric" formatString="#,###" aggregator="max" caption="Retention Rate" visible="true">
+    </Measure>
+    <Measure name="rent_1bedroom" column="rent_1_bedroom" datatype="Numeric" formatString="#,###" aggregator="max" caption="Rent 1 Bedroom" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
+
